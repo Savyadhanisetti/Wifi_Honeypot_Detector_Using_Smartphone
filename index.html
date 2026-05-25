@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WiFi Detector</title>
+
+<style>
+body { margin:0; font-family:Arial; background:#f0f2f5; }
+
+.appbar {
+    background:#6200ee;
+    color:white;
+    padding:15px;
+    text-align:center;
+    font-size:18px;
+}
+
+.container { padding:10px; }
+
+.card {
+    background:white;
+    padding:12px;
+    margin-bottom:10px;
+    border-radius:10px;
+}
+
+.high { color:red; }
+.medium { color:orange; }
+.low { color:green; }
+
+table {
+    width:100%;
+    background:white;
+    margin-bottom:15px;
+    border-collapse:collapse;
+}
+
+th {
+    background:#6200ee;
+    color:white;
+    padding:8px;
+}
+
+td {
+    padding:8px;
+    border-bottom:1px solid #ddd;
+}
+</style>
+
+<!-- AUTO REFRESH -->
+<script>
+setTimeout(function(){
+    location.reload();
+}, 8000);
+</script>
+
+</head>
+
+<body>
+
+<div class="appbar">📡 WiFi Honeypot Detector</div>
+
+<div class="container">
+
+<h3>📊 Suspicious Networks</h3>
+
+<table>
+<tr>
+<th>SSID</th>
+<th>APs</th>
+<th>Reason</th>
+</tr>
+
+{% for s in summary %}
+<tr>
+<td>{{s.ssid}}</td>
+<td>{{s.count}}</td>
+<td>{{s.desc}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>📶 Networks</h3>
+
+{% for n in nets %}
+<div class="card">
+
+<b>{{n.ssid}}</b><br>
+Signal: {{n.signal}}<br>
+Security: {{n.security}}<br>
+
+{% set reasons = analyze_network(n, nets) %}
+{% set risk = calculate_risk(reasons) %}
+
+{% if risk == "High" %}
+<span class="high">🔴 High Risk</span>
+{% elif risk == "Medium" %}
+<span class="medium">🟠 Medium Risk</span>
+{% else %}
+<span class="low">🟢 Low Risk</span>
+{% endif %}
+
+<br><small>{{ reasons | join(' | ') }}</small>
+
+</div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>
