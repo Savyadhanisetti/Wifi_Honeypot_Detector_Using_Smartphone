@@ -4,6 +4,7 @@ A smart cybersecurity project that detects suspicious and fake WiFi access point
 
 The project is developed using Python, Flask, and networking tools to provide real-time WiFi threat detection through a simple web-based interface. It helps users avoid connecting to fake public WiFi networks that may be used for data theft, phishing, or man-in-the-middle attacks.
 
+
 **Features**
 Scan nearby WiFi networks
 Detect duplicate/fake SSIDs
@@ -12,6 +13,7 @@ Analyze signal strength and security type
 Real-time detection results
 User-friendly web interface
 Smartphone compatible access
+
 **Technologies Used**
 Python
 Flask
@@ -19,6 +21,7 @@ HTML/CSS/JavaScript
 Networking Commands (netsh)
 Cybersecurity Concepts
 WiFi Network Analysis
+
 **Objective**
 
 The main objective of this project is to improve user safety while connecting to public WiFi networks by detecting potential honeypot attacks before a connection is established.
